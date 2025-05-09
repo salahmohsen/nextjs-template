@@ -1,23 +1,30 @@
-import { relations } from "drizzle-orm";
-import { boolean, integer, pgTable, primaryKey, text } from "drizzle-orm/pg-core";
-import authorRules from "./post.author.role";
-import userTable from "./user";
+import { relations } from 'drizzle-orm'
+import {
+  boolean,
+  integer,
+  pgTable,
+  primaryKey,
+  text,
+} from 'drizzle-orm/pg-core'
+
+import authorRules from './post.author.role'
+import userTable from './user'
 
 const authorToRoleTable = pgTable(
-  "author_to_role",
+  'author_to_role',
   {
-    authorId: text("author_id")
+    authorId: text('author_id')
       .notNull()
-      .references(() => userTable.id, { onDelete: "cascade" }),
+      .references(() => userTable.id, { onDelete: 'cascade' }),
 
-    roleId: integer("rule_id")
+    isMainAuthor: boolean('is_main_author').notNull().default(false),
+
+    roleId: integer('rule_id')
       .notNull()
-      .references(() => authorRules.id, { onDelete: "cascade" }),
-
-    isMainAuthor: boolean("is_main_author").notNull().default(false),
+      .references(() => authorRules.id, { onDelete: 'cascade' }),
   },
   (t) => [primaryKey({ columns: [t.authorId, t.roleId] })],
-);
+)
 
 export const postAuthorRelations = relations(authorToRoleTable, ({ one }) => ({
   author: one(userTable, {
@@ -28,6 +35,6 @@ export const postAuthorRelations = relations(authorToRoleTable, ({ one }) => ({
     fields: [authorToRoleTable.roleId],
     references: [authorRules.id],
   }),
-}));
+}))
 
-export default authorToRoleTable;
+export default authorToRoleTable

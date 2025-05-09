@@ -6,9 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "validate": "npm run lint && npm run tsc --noEmit",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --ignore-path .gitignore",
     "prepare": "husky"
   },
   "dependencies": {
@@ -32,9 +31,13 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-perfectionist": "^4.12.3",
+    "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-project-structure": "^3.13.3",
     "husky": "^9.1.7",
     "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

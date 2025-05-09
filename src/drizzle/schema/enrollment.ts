@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations } from 'drizzle-orm'
 import {
   integer,
   pgTable,
@@ -6,28 +6,35 @@ import {
   text,
   timestamp,
   varchar,
-} from "drizzle-orm/pg-core";
-import courseTable from "./course";
-import userTable from "./user";
+} from 'drizzle-orm/pg-core'
+
+import courseTable from './course'
+import userTable from './user'
 
 const enrollmentTable = pgTable(
-  "course_enrollment",
+  'course_enrollment',
   {
-    courseId: integer("course_id")
+    courseId: integer('course_id')
       .notNull()
-      .references(() => courseTable.id, { onDelete: "cascade" }),
-    userId: text("user_id")
-      .notNull()
-      .references(() => userTable.id, { onDelete: "cascade" }),
-    enrollmentDate: timestamp("enrollment_date", { mode: "date", withTimezone: true })
+      .references(() => courseTable.id, { onDelete: 'cascade' }),
+    enrollmentDate: timestamp('enrollment_date', {
+      mode: 'date',
+      withTimezone: true,
+    })
       .notNull()
       .defaultNow(),
-    status: varchar("status", { length: 20 }).notNull().default("pending"),
-    paidAmount: integer("paid_amount"),
-    paymentDate: timestamp("payment_date", { mode: "date", withTimezone: true }),
+    paidAmount: integer('paid_amount'),
+    paymentDate: timestamp('payment_date', {
+      mode: 'date',
+      withTimezone: true,
+    }),
+    status: varchar('status', { length: 20 }).notNull().default('pending'),
+    userId: text('user_id')
+      .notNull()
+      .references(() => userTable.id, { onDelete: 'cascade' }),
   },
   (t) => [primaryKey({ columns: [t.courseId, t.userId] })],
-);
+)
 
 export const enrollmentRelations = relations(enrollmentTable, ({ one }) => ({
   course: one(courseTable, {
@@ -38,6 +45,6 @@ export const enrollmentRelations = relations(enrollmentTable, ({ one }) => ({
     fields: [enrollmentTable.userId],
     references: [userTable.id],
   }),
-}));
+}))
 
-export default enrollmentTable;
+export default enrollmentTable
