@@ -6,22 +6,37 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "validate": "npm run lint && npm run tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --ignore-path .gitignore",
+    "prepare": "husky"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "@t3-oss/env-nextjs": "^0.13.4",
+    "arktype": "^2.1.20",
+    "drizzle-orm": "^0.43.1",
+    "next": "15.3.2",
+    "npmrc-replace-env": "^1.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.2"
+    "ws": "^8.18.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "@types/ws": "^8.18.1",
+    "drizzle-kit": "^0.31.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-project-structure": "^3.13.3",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
