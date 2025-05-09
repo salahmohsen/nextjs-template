@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "validate": "npm run lint && npm run tsc --noEmit",
+    "validate": "bun run lint && bun run tsc --noEmit",
     "prepare": "husky"
   },
   "dependencies": {
