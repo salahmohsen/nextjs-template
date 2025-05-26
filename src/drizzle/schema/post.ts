@@ -6,7 +6,7 @@ import {
   serial,
   text,
   timestamp,
-  varchar,
+  varchar
 } from 'drizzle-orm/pg-core'
 
 import { authorsTable } from '.'
@@ -28,18 +28,18 @@ const postsTable = pgTable('posts', {
   isDraft: boolean('is_draft').notNull().default(true),
   publishedAt: timestamp('published_at', {
     mode: 'date',
-    withTimezone: true,
+    withTimezone: true
   }).notNull(),
   slug: varchar('slug', { length: 255 }).unique().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
-    .defaultNow(),
+    .defaultNow()
 })
 
 export const postsRelations = relations(postsTable, ({ many }) => ({
   authors: many(authorsTable),
   categories: many(blogsToCategoriesTable),
-  tags: many(postsToTagsTable),
+  tags: many(postsToTagsTable)
 }))
 
 export default postsTable

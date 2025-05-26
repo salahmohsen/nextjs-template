@@ -4,7 +4,7 @@ import {
   integer,
   pgTable,
   primaryKey,
-  text,
+  text
 } from 'drizzle-orm/pg-core'
 
 import authorRules from './post.author.role'
@@ -21,20 +21,20 @@ const authorToRoleTable = pgTable(
 
     roleId: integer('rule_id')
       .notNull()
-      .references(() => authorRules.id, { onDelete: 'cascade' }),
+      .references(() => authorRules.id, { onDelete: 'cascade' })
   },
-  (t) => [primaryKey({ columns: [t.authorId, t.roleId] })],
+  (t) => [primaryKey({ columns: [t.authorId, t.roleId] })]
 )
 
 export const postAuthorRelations = relations(authorToRoleTable, ({ one }) => ({
   author: one(userTable, {
     fields: [authorToRoleTable.authorId],
-    references: [userTable.id],
+    references: [userTable.id]
   }),
   role: one(authorRules, {
     fields: [authorToRoleTable.roleId],
-    references: [authorRules.id],
-  }),
+    references: [authorRules.id]
+  })
 }))
 
 export default authorToRoleTable

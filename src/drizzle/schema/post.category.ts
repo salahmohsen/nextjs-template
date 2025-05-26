@@ -10,7 +10,7 @@ const postCategoriesTable = pgTable('post_categories', {
   slug: varchar('slug', { length: 150 }).unique().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
-    .defaultNow(),
+    .defaultNow()
 })
 
 export default postCategoriesTable

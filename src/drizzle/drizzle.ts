@@ -2,7 +2,7 @@ import { env } from '@/env'
 import {
   neon,
   NeonConfig,
-  WebSocketConstructor,
+  WebSocketConstructor
 } from '@neondatabase/serverless'
 import { drizzle } from 'drizzle-orm/neon-http'
 
@@ -23,13 +23,13 @@ if (typeof window === 'undefined') {
 export const sql = neon(env.NEON_DATABASE_URL!)
 export const db = drizzle(sql, {
   logger: false,
-  schema,
+  schema
 })
 
 export type db = typeof db
 
 export async function performTransaction<T>(
-  callback: (txDb: db) => Promise<T>,
+  callback: (txDb: db) => Promise<T>
 ): Promise<T> {
   try {
     await sql`BEGIN TRANSACTION`

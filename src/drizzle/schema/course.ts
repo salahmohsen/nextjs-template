@@ -9,7 +9,7 @@ import {
   serial,
   text,
   timestamp,
-  varchar,
+  varchar
 } from 'drizzle-orm/pg-core'
 
 import enrollmentTable from './enrollment'
@@ -41,15 +41,15 @@ const timeSlot = customType<{ data: TimeSlot }>({
       const slot = value as { from?: string; to?: string }
       return {
         from: new Date(slot.from || Date.now()),
-        to: new Date(slot.to || Date.now()),
+        to: new Date(slot.to || Date.now())
       }
     }
     throw new Error('Invalid time slot format')
   },
   toDriver: (value: TimeSlot): unknown => ({
     from: value.from.toISOString(),
-    to: value.to.toISOString(),
-  }),
+    to: value.to.toISOString()
+  })
 })
 
 const courseTable = pgTable('course', {
@@ -84,15 +84,15 @@ const courseTable = pgTable('course', {
   timeSlot: timeSlot('time_slot').notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
-    .defaultNow(),
+    .defaultNow()
 })
 
 export const courseRelations = relations(courseTable, ({ many, one }) => ({
   enrollments: many(enrollmentTable),
   fellow: one(userTable, {
     fields: [courseTable.fellowId],
-    references: [userTable.id],
-  }),
+    references: [userTable.id]
+  })
 }))
 
 export default courseTable

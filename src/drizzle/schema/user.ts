@@ -26,14 +26,14 @@ const userTable = pgTable('user', {
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
     .defaultNow(),
-  userName: varchar('user_name', { length: 50 }).unique(),
+  userName: varchar('user_name', { length: 50 }).unique()
 })
 
 export const userRelations = relations(userTable, ({ many }) => ({
   courses: many(courseTable, { relationName: 'fellow' }),
   enrollments: many(enrollmentTable),
   postAuthors: many(blogAuthorsTable),
-  sessions: many(sessionTable),
+  sessions: many(sessionTable)
 }))
 
 export default userTable

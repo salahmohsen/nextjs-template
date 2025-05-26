@@ -5,7 +5,7 @@ import {
   primaryKey,
   text,
   timestamp,
-  varchar,
+  varchar
 } from 'drizzle-orm/pg-core'
 
 import courseTable from './course'
@@ -19,32 +19,32 @@ const enrollmentTable = pgTable(
       .references(() => courseTable.id, { onDelete: 'cascade' }),
     enrollmentDate: timestamp('enrollment_date', {
       mode: 'date',
-      withTimezone: true,
+      withTimezone: true
     })
       .notNull()
       .defaultNow(),
     paidAmount: integer('paid_amount'),
     paymentDate: timestamp('payment_date', {
       mode: 'date',
-      withTimezone: true,
+      withTimezone: true
     }),
     status: varchar('status', { length: 20 }).notNull().default('pending'),
     userId: text('user_id')
       .notNull()
-      .references(() => userTable.id, { onDelete: 'cascade' }),
+      .references(() => userTable.id, { onDelete: 'cascade' })
   },
-  (t) => [primaryKey({ columns: [t.courseId, t.userId] })],
+  (t) => [primaryKey({ columns: [t.courseId, t.userId] })]
 )
 
 export const enrollmentRelations = relations(enrollmentTable, ({ one }) => ({
   course: one(courseTable, {
     fields: [enrollmentTable.courseId],
-    references: [courseTable.id],
+    references: [courseTable.id]
   }),
   user: one(userTable, {
     fields: [enrollmentTable.userId],
-    references: [userTable.id],
-  }),
+    references: [userTable.id]
+  })
 }))
 
 export default enrollmentTable

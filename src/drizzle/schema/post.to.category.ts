@@ -12,9 +12,9 @@ const postsToCategoriesTable = pgTable(
       .references(() => blogCategoriesTable.id, { onDelete: 'cascade' }),
     postId: integer('blog_id')
       .notNull()
-      .references(() => postsTable.id, { onDelete: 'cascade' }),
+      .references(() => postsTable.id, { onDelete: 'cascade' })
   },
-  (t) => [primaryKey({ columns: [t.postId, t.categoryId] })],
+  (t) => [primaryKey({ columns: [t.postId, t.categoryId] })]
 )
 
 export const postsToCategoriesRelations = relations(
@@ -22,13 +22,13 @@ export const postsToCategoriesRelations = relations(
   ({ one }) => ({
     category: one(blogCategoriesTable, {
       fields: [postsToCategoriesTable.categoryId],
-      references: [blogCategoriesTable.id],
+      references: [blogCategoriesTable.id]
     }),
     post: one(postsTable, {
       fields: [postsToCategoriesTable.postId],
-      references: [postsTable.id],
-    }),
-  }),
+      references: [postsTable.id]
+    })
+  })
 )
 
 export default postsToCategoriesTable

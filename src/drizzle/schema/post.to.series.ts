@@ -13,11 +13,11 @@ const blogToSeriesTable = pgTable(
       .references(() => postsTable.id, { onDelete: 'cascade' }),
     seriesId: integer('series_id')
       .notNull()
-      .references(() => seriesTable.id, { onDelete: 'cascade' }),
+      .references(() => seriesTable.id, { onDelete: 'cascade' })
   },
   (t) => ({
-    primaryKey: primaryKey({ columns: [t.seriesId, t.postId] }),
-  }),
+    primaryKey: primaryKey({ columns: [t.seriesId, t.postId] })
+  })
 )
 
 export const blogToSeriesRelations = relations(
@@ -25,13 +25,13 @@ export const blogToSeriesRelations = relations(
   ({ one }) => ({
     post: one(postsTable, {
       fields: [blogToSeriesTable.postId],
-      references: [postsTable.id],
+      references: [postsTable.id]
     }),
     series: one(seriesTable, {
       fields: [blogToSeriesTable.seriesId],
-      references: [seriesTable.id],
-    }),
-  }),
+      references: [seriesTable.id]
+    })
+  })
 )
 
 export default blogToSeriesTable

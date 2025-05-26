@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "validate": "bun run lint && bun run tsc --noEmit",
     "prepare": "husky"
   },

@@ -12,20 +12,20 @@ const postsToTagsTable = pgTable(
       .references(() => postsTable.id, { onDelete: 'cascade' }),
     tagId: integer('tag_id')
       .notNull()
-      .references(() => postTagsTable.id, { onDelete: 'cascade' }),
+      .references(() => postTagsTable.id, { onDelete: 'cascade' })
   },
-  (t) => [primaryKey({ columns: [t.postId, t.tagId] })],
+  (t) => [primaryKey({ columns: [t.postId, t.tagId] })]
 )
 
 export const postsToTagsRelations = relations(postsToTagsTable, ({ one }) => ({
   post: one(postsTable, {
     fields: [postsToTagsTable.postId],
-    references: [postsTable.id],
+    references: [postsTable.id]
   }),
   tag: one(postTagsTable, {
     fields: [postsToTagsTable.tagId],
-    references: [postTagsTable.id],
-  }),
+    references: [postTagsTable.id]
+  })
 }))
 
 export default postsToTagsTable

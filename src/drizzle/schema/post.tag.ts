@@ -13,11 +13,11 @@ const blogTagsTable = pgTable('blog_tags', {
   slug: varchar('slug', { length: 150 }).unique().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
-    .defaultNow(),
+    .defaultNow()
 })
 
 export const blogTagRelations = relations(blogTagsTable, ({ many }) => ({
-  blogs: many(postsToTagsTable),
+  blogs: many(postsToTagsTable)
 }))
 
 export default blogTagsTable

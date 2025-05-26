@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: __dirname
 })
 
 const eslintConfig = [
@@ -16,7 +16,7 @@ const eslintConfig = [
       'next/core-web-vitals',
       'next/typescript',
       'plugin:prettier/recommended',
-      'plugin:jsx-a11y/recommended',
+      'plugin:jsx-a11y/recommended'
     ],
     plugins: ['project-structure', 'perfectionist', 'prettier', 'jsx-a11y'],
     rules: {
@@ -38,20 +38,20 @@ const eslintConfig = [
           semi: false,
           singleQuote: true,
           tabWidth: 2,
-          trailingComma: 'all',
+          trailingComma: 'none'
         },
         {
-          usePrettierrc: false,
-        },
+          usePrettierrc: false
+        }
       ],
-      'react/react-in-jsx-scope': 'off',
+      'react/react-in-jsx-scope': 'off'
     },
     settings: {
       'project-structure/independent-modules-config-path':
         'independentModules.jsonc',
-      ...perfectionist.configs['recommended-natural'].settings,
-    },
-  }),
+      ...perfectionist.configs['recommended-natural'].settings
+    }
+  })
 ]
 
 export default eslintConfig
