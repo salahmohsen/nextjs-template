@@ -1,4 +1,4 @@
-import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
 
 const postCategoriesTable = pgTable('post_categories', {
   arName: varchar('ar_name', { length: 100 }).unique().notNull(),
@@ -11,6 +11,6 @@ const postCategoriesTable = pgTable('post_categories', {
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
     .defaultNow()
-})
+});
 
-export default postCategoriesTable
+export default postCategoriesTable;

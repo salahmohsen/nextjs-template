@@ -1,14 +1,14 @@
-import { relations } from 'drizzle-orm'
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   integer,
   pgTable,
   primaryKey,
   text
-} from 'drizzle-orm/pg-core'
+} from 'drizzle-orm/pg-core';
 
-import authorRules from './post.author.role'
-import userTable from './user'
+import authorRules from './post.author.role';
+import userTable from './user';
 
 const authorToRoleTable = pgTable(
   'author_to_role',
@@ -24,7 +24,7 @@ const authorToRoleTable = pgTable(
       .references(() => authorRules.id, { onDelete: 'cascade' })
   },
   (t) => [primaryKey({ columns: [t.authorId, t.roleId] })]
-)
+);
 
 export const postAuthorRelations = relations(authorToRoleTable, ({ one }) => ({
   author: one(userTable, {
@@ -35,6 +35,6 @@ export const postAuthorRelations = relations(authorToRoleTable, ({ one }) => ({
     fields: [authorToRoleTable.roleId],
     references: [authorRules.id]
   })
-}))
+}));
 
-export default authorToRoleTable
+export default authorToRoleTable;

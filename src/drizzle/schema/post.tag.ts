@@ -1,7 +1,7 @@
-import { relations } from 'drizzle-orm'
-import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm';
+import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
 
-import postsToTagsTable from './post.to.tag'
+import postsToTagsTable from './post.to.tag';
 
 const blogTagsTable = pgTable('blog_tags', {
   arName: varchar('ar_name', { length: 100 }).unique().notNull(),
@@ -14,10 +14,10 @@ const blogTagsTable = pgTable('blog_tags', {
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
     .defaultNow()
-})
+});
 
 export const blogTagRelations = relations(blogTagsTable, ({ many }) => ({
   blogs: many(postsToTagsTable)
-}))
+}));
 
-export default blogTagsTable
+export default blogTagsTable;

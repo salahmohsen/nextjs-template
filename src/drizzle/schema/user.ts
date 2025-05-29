@@ -1,13 +1,14 @@
-import { env } from '@/env'
-import { relations } from 'drizzle-orm'
-import { pgEnum, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm';
+import { pgEnum, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 
-import courseTable from './course'
-import enrollmentTable from './enrollment'
-import blogAuthorsTable from './post.author.to.role'
-import sessionTable from './session'
+import { env } from '@/env';
 
-export const userRoleEnum = pgEnum('role', ['admin', 'fellow', 'user'])
+import courseTable from './course';
+import enrollmentTable from './enrollment';
+import blogAuthorsTable from './post.author.to.role';
+import sessionTable from './session';
+
+export const userRoleEnum = pgEnum('role', ['admin', 'fellow', 'user']);
 
 const userTable = pgTable('user', {
   avatar: text('avatar'),
@@ -27,13 +28,13 @@ const userTable = pgTable('user', {
     .notNull()
     .defaultNow(),
   userName: varchar('user_name', { length: 50 }).unique()
-})
+});
 
 export const userRelations = relations(userTable, ({ many }) => ({
   courses: many(courseTable, { relationName: 'fellow' }),
   enrollments: many(enrollmentTable),
   postAuthors: many(blogAuthorsTable),
   sessions: many(sessionTable)
-}))
+}));
 
-export default userTable
+export default userTable;

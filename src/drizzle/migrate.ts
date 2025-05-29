@@ -1,5 +1,5 @@
-import { migrate } from 'drizzle-orm/neon-http/migrator'
+import { migrate } from 'drizzle-orm/neon-serverless/migrator';
 
-import db from './drizzle'
+import { db } from './drizzle';
 
-await migrate(db, { migrationsFolder: './migrations' })
+await migrate(db, { migrationsFolder: './migrations' });

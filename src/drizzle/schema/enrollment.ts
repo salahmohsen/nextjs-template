@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm'
+import { relations } from 'drizzle-orm';
 import {
   integer,
   pgTable,
@@ -6,10 +6,10 @@ import {
   text,
   timestamp,
   varchar
-} from 'drizzle-orm/pg-core'
+} from 'drizzle-orm/pg-core';
 
-import courseTable from './course'
-import userTable from './user'
+import courseTable from './course';
+import userTable from './user';
 
 const enrollmentTable = pgTable(
   'course_enrollment',
@@ -34,7 +34,7 @@ const enrollmentTable = pgTable(
       .references(() => userTable.id, { onDelete: 'cascade' })
   },
   (t) => [primaryKey({ columns: [t.courseId, t.userId] })]
-)
+);
 
 export const enrollmentRelations = relations(enrollmentTable, ({ one }) => ({
   course: one(courseTable, {
@@ -45,6 +45,6 @@ export const enrollmentRelations = relations(enrollmentTable, ({ one }) => ({
     fields: [enrollmentTable.userId],
     references: [userTable.id]
   })
-}))
+}));
 
-export default enrollmentTable
+export default enrollmentTable;

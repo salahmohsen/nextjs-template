@@ -1,8 +1,8 @@
-import { relations } from 'drizzle-orm'
-import { integer, pgTable, primaryKey } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm';
+import { integer, pgTable, primaryKey } from 'drizzle-orm/pg-core';
 
-import postsTable from './post'
-import seriesTable from './post.series'
+import postsTable from './post';
+import seriesTable from './post.series';
 
 const blogToSeriesTable = pgTable(
   'series_posts',
@@ -18,7 +18,7 @@ const blogToSeriesTable = pgTable(
   (t) => ({
     primaryKey: primaryKey({ columns: [t.seriesId, t.postId] })
   })
-)
+);
 
 export const blogToSeriesRelations = relations(
   blogToSeriesTable,
@@ -32,6 +32,6 @@ export const blogToSeriesRelations = relations(
       references: [seriesTable.id]
     })
   })
-)
+);
 
-export default blogToSeriesTable
+export default blogToSeriesTable;

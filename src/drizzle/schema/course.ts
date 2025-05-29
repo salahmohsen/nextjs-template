@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm'
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   customType,
@@ -10,47 +10,47 @@ import {
   text,
   timestamp,
   varchar
-} from 'drizzle-orm/pg-core'
+} from 'drizzle-orm/pg-core';
 
-import enrollmentTable from './enrollment'
-import userTable from './user'
+import enrollmentTable from './enrollment';
+import userTable from './user';
 
 export type JSONContent = {
-  [key: string]: unknown
-  attrs?: Record<string, unknown>
-  content?: JSONContent[]
+  [key: string]: unknown;
+  attrs?: Record<string, unknown>;
+  content?: JSONContent[];
   marks?: {
-    [key: string]: unknown
-    attrs?: Record<string, unknown>
-    type: string
-  }[]
-  text?: string
-  type?: string
-}
+    [key: string]: unknown;
+    attrs?: Record<string, unknown>;
+    type: string;
+  }[];
+  text?: string;
+  type?: string;
+};
 
 type TimeSlot = {
-  from: Date
-  to: Date
-}
+  from: Date;
+  to: Date;
+};
 
 const timeSlot = customType<{ data: TimeSlot }>({
   dataType: () => 'json',
   fromDriver: (value: unknown): TimeSlot => {
     // Runtime validation
     if (typeof value === 'object' && value !== null) {
-      const slot = value as { from?: string; to?: string }
+      const slot = value as { from?: string; to?: string };
       return {
         from: new Date(slot.from || Date.now()),
         to: new Date(slot.to || Date.now())
-      }
+      };
     }
-    throw new Error('Invalid time slot format')
+    throw new Error('Invalid time slot format');
   },
   toDriver: (value: TimeSlot): unknown => ({
     from: value.from.toISOString(),
     to: value.to.toISOString()
   })
-})
+});
 
 const courseTable = pgTable('course', {
   applyUrl: text('apply_url'),
@@ -63,9 +63,9 @@ const courseTable = pgTable('course', {
     .defaultNow(),
   days: json('days').$type<
     {
-      disable?: boolean
-      label: string
-      value: string
+      disable?: boolean;
+      label: string;
+      value: string;
     }[]
   >(),
   draftMode: boolean('draft_mode').default(true),
@@ -85,7 +85,7 @@ const courseTable = pgTable('course', {
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
     .defaultNow()
-})
+});
 
 export const courseRelations = relations(courseTable, ({ many, one }) => ({
   enrollments: many(enrollmentTable),
@@ -93,6 +93,6 @@ export const courseRelations = relations(courseTable, ({ many, one }) => ({
     fields: [courseTable.fellowId],
     references: [userTable.id]
   })
-}))
+}));
 
-export default courseTable
+export default courseTable;

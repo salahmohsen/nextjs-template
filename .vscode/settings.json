@@ -1,8 +1,7 @@
 {
   "css.customData": [".vscode/tailwind.json"],
   "editor.codeActionsOnSave": {
-    "source.removeUnusedImports": "explicit",
-    "source.organizeImports": "explicit",
+    "source.removeUnusedImports": "never",
     "source.fixAll.eslint": "explicit"
   },
   // allow autocomplete for ArkType expressions like "string | num"

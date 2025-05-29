@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm'
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   json,
@@ -7,12 +7,12 @@ import {
   text,
   timestamp,
   varchar
-} from 'drizzle-orm/pg-core'
+} from 'drizzle-orm/pg-core';
 
-import { authorsTable } from '.'
-import { JSONContent } from './course'
-import blogsToCategoriesTable from './post.to.category'
-import postsToTagsTable from './post.to.tag'
+import { authorsTable } from '.';
+import { JSONContent } from './course';
+import blogsToCategoriesTable from './post.to.category';
+import postsToTagsTable from './post.to.tag';
 
 const postsTable = pgTable('posts', {
   arContent: json('ar_content').$type<JSONContent>().notNull(),
@@ -34,12 +34,12 @@ const postsTable = pgTable('posts', {
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true })
     .notNull()
     .defaultNow()
-})
+});
 
 export const postsRelations = relations(postsTable, ({ many }) => ({
   authors: many(authorsTable),
   categories: many(blogsToCategoriesTable),
   tags: many(postsToTagsTable)
-}))
+}));
 
-export default postsTable
+export default postsTable;
