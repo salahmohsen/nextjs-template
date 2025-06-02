@@ -1,4 +1,5 @@
 import { FlatCompat } from '@eslint/eslintrc';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 import perfectionist from 'eslint-plugin-perfectionist';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -62,19 +63,6 @@ const eslintConfig = [
           type: 'natural'
         }
       ],
-      'prettier/prettier': [
-        'error',
-        {
-          arrowParens: 'always',
-          endOfLine: 'lf',
-          plugins: ['prettier-plugin-tailwindcss'],
-          printWidth: 80,
-          singleQuote: true,
-          tabWidth: 2,
-          trailingComma: 'none',
-          usePrettierrc: false
-        }
-      ],
       'project-structure/independent-modules': 'error',
       'sort-imports': 'off'
     },
@@ -83,7 +71,8 @@ const eslintConfig = [
         'independentModules.jsonc',
       ...perfectionist.configs['recommended-natural'].settings
     }
-  })
+  }),
+  ...pluginQuery.configs['flat/recommended']
 ];
 
 export default eslintConfig;

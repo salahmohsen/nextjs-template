@@ -4,7 +4,11 @@
     {
       "name": "App folder",
       "pattern": "src/app/**",
-      "allowImportsFrom": ["src/app/globals.css", "{sharedImports}", "src/features/**"]
+      "allowImportsFrom": [
+        "src/app/globals.css",
+        "src/features/**",
+        "{sharedImports}"
+      ]
     },
     {
       "name": "Features",
@@ -14,21 +18,16 @@
     },
 
     {
-      "name": "Permissions file",
-      "pattern": "src/lib/permissions.ts",
-      "allowImportsFrom": ["src/features/**/db/**"],
-      "errorMessage": "🔥 The permission file may only import items from `src/features/**/db/**` 🔥"
-    },
-    {
       "name": "Shared",
       "pattern": [
         "src/components/**",
         "src/data/**",
-        "src/drizzle/**",
         "src/hooks/**",
         "src/lib/**",
         "src/server/**",
-        "src/env.ts"
+        "src/env.ts",
+        "src/providers/**",
+        "public/**"
       ],
       "allowImportsFrom": ["{sharedImports}"],
       "errorMessage": "🔥 Shared folders are not allowed to import items from the `features` and `app` folders. 🔥"
@@ -47,11 +46,13 @@
     "sharedImports": [
       "src/components/**",
       "src/data/**",
-      "src/drizzle/**",
       "src/hooks/**",
       "src/lib/**",
       "src/server/**",
-      "src/env.ts"
+      "src/env.ts",
+      "src/providers/**",
+      "src/app/global.css",
+      "public/**"
     ]
   }
 }
